@@ -1,30 +1,35 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
   const formData = useRef();
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
 
-    // Admin mail
-    emailjs.sendForm(
-      "service_p56dz8w",
-      "template_7utiosr",
-      formData.current,
-      "lvnSrkdzXH3cyZJjc",
-    );
+    try {
+      // Admin mail
+      await emailjs.sendForm(
+        "service_p56dz8w",
+        "template_7utiosr",
+        formData.current,
+        "lvnSrkdzXH3cyZJjc",
+      );
 
-    // Auto reply mail
-    emailjs.sendForm(
-      "service_p56dz8w",
-      "template_u6ym995",
-      formData.current,
-      "lvnSrkdzXH3cyZJjc",
-    );
+      // Auto reply mail
+      await emailjs.sendForm(
+        "service_p56dz8w",
+        "template_u6ym995",
+        formData.current,
+        "lvnSrkdzXH3cyZJjc",
+      );
 
-    alert("Message sent successfully");
-    formData.current.reset();
+      toast.success("Message sent successfully");
+      formData.current.reset();
+    } catch (error) {
+      toast.error("Failed to send message");
+    }
   };
 
   return (
@@ -97,7 +102,7 @@ const ContactForm = () => {
         <div className="mt-6">
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 text-white rounded-lg active:bg-blue-900"
+            className="w-full py-3 bg-blue-600 text-white rounded-lg active:bg-blue-900 hover:cursor-pointer"
           >
             Send Message
           </button>
