@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import ContactForm from "./components/ContactForm";
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <div className="bg-blue-200 min-h-screen flex justify-center items-center">
+      <ContactForm />
+    </div>
+  );
+};
 
-export default App
+export default App;
